@@ -54,7 +54,7 @@ function createAddWindow(){
 
 // Catch Item:add
 ipcMain.on('item:add', function(e, item){
-    main.Window.webContents.send('item:add', item);
+    mainWindow.webContents.send('item:add', item);
     addWindow.close();
 });
 
@@ -71,7 +71,10 @@ const mainMenuTemplate = [
                 }
             },
             {
-                label: 'Clear Item'
+                label: 'Clear Item',
+                click(){
+                    mainWindow.webContents.send('item:clear');
+                }
             },
             {
                 label: 'Quit',
@@ -107,4 +110,8 @@ if(process.env.NODE_ENV !== 'production'){
             }
         ]
     });
+}
+
+function newFunction(item) {
+    console.log(item);
 }
